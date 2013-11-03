@@ -44,11 +44,18 @@ title: GradeCalc
           p.lead.noError
             | You need to earn at least 
             strong.neededForFinal ???
-            strong %
+            strong="/"
+            strong.finalWeight ???
+            |  or 
+            strong.neededForFinalPC ???
+            strong="%"
             |  on the final to have an overall grade of  
             strong.desiredGrade ???
             strong="/"
             strong.desiredGradeOutOf ???
+            |  or 
+            strong.desiredGradePC ???
+            strong="%"
             | .
             / .dump
           .error
@@ -78,7 +85,8 @@ coffee:
 
       currentWeightPC = 1-finalWeightPC
 
-      neededForFinal = Math.max((desiredGradePC-currentGradePC*currentWeightPC)/finalWeightPC*100,0)
+      neededForFinalPC = Math.max((desiredGradePC-currentGradePC*currentWeightPC)/finalWeightPC*100,0)
+      neededForFinal = neededForFinalPC*finalWeight/100
 
       if isNaN(neededForFinal)
         $("#results .noError").addClass("hidden")
@@ -87,9 +95,12 @@ coffee:
         $("#results .noError").removeClass("hidden")
         $("#results .error").addClass("hidden")
 
-      $("#results .neededForFinal").text(neededForFinal.toFixed(1))
+      $("#results .neededForFinal").text(neededForFinal.toFixed(0))
+      $("#results .finalWeight").text(finalWeight.toFixed(0))
+      $("#results .neededForFinalPC").text(neededForFinalPC.toFixed(1))
       $("#results .desiredGrade").text(desiredGrade.toFixed(0))
       $("#results .desiredGradeOutOf").text(desiredGradeOutOf.toFixed(0))
+      $("#results .desiredGradePC").text((desiredGradePC*100).toFixed(1))
       # $(".dump").text([currentGrade, finalWeight, desiredGrade, currentWeight, neededForFinal])
 
     updateResults()
