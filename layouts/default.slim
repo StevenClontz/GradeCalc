@@ -1,0 +1,30 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    title
+      = @item[:title]
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"
+    link rel="icon" href="calculator.ico"
+    less:
+      @darkbg: #B4E3A3;
+      @lightbg: #E3FFD9;
+      body {
+        background:@lightbg;
+      }
+      .jumbotron { 
+        padding:0;
+        background:@darkbg;
+      }
+      hr {
+        border-top-color:@darkbg;
+      }
+
+    script type="text/javascript" src="//codeorigin.jquery.com/jquery-2.0.3.min.js"
+    / script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"
+
+    / you don't need to keep this, but it's cool for stats!
+    meta name="generator" content="nanoc #{Nanoc::VERSION}"
+
+  body
+    == yield

@@ -1,0 +1,101 @@
+---
+title: GradeCalc
+---
+
+.jumbotron
+  .container
+    .row
+      .col-md-offset-3.col-md-6
+        h1 GradeCalc
+        p 
+          | A simple tool to figure out what you need
+          br
+          | to get that A (or B?).
+
+.container
+  .row
+    .col-md-offset-3.col-md-6
+      form#gradeForm role="form"
+        .row
+          .form-group.col-md-6
+            label for="currentGrade" Your Current Grade:
+            input#currentGrade type="number" class="form-control" value="85" placeholder="100" min="0"
+          .form-group.col-md-6
+            label for="currentGradeOutOf" Out of:
+            input#currentGradeOutOf type="number" class="form-control" value="100" placeholder="100" min="1"
+        hr
+        .row
+          .form-group.col-md-6
+            label for="finalWeight" Weight of Final Exam:
+            input#finalWeight type="number" class="form-control" value="50" placeholder="50" min="0"
+          .form-group.col-md-6
+            label for="finalWeightOutOf" Out of:
+            input#finalWeightOutOf type="number" class="form-control" value="100" placeholder="100" min="1"
+        hr
+        .row
+          .form-group.col-md-6
+            label for="desiredGrade" Desired Grade:
+            input#desiredGrade type="number" class="form-control" value="90" placeholder="90" min="0"
+          .form-group.col-md-6
+            label for="desiredGradeOutOf" Out of:
+            input#desiredGradeOutOf type="number" class="form-control" value="100" placeholder="100" min="1"
+        hr
+        #results.text-center
+          p.lead.noError
+            | You need to earn at least 
+            strong.neededForFinal ???
+            strong %
+            |  on the final to have an overall grade of  
+            strong.desiredGrade ???
+            strong="/"
+            strong.desiredGradeOutOf ???
+            | .
+            / .dump
+          .error
+            | Check to make sure all fields are filled in correctly.
+        p 
+          | Made by 
+          a href="http://www.stevenclontz.com" Steven Clontz
+          |  (Github: 
+          a href="http://github.com/StevenClontz/GradeCalc" @StevenClontz
+          | )
+
+
+coffee:
+  jQuery ->
+    updateResults = ->
+      gradeForm = $("#gradeForm")
+      currentGrade = parseFloat $(gradeForm).find("#currentGrade").val()
+      finalWeight = parseFloat $(gradeForm).find("#finalWeight").val()
+      desiredGrade = parseFloat $(gradeForm).find("#desiredGrade").val()
+      currentGradeOutOf = parseFloat $(gradeForm).find("#currentGradeOutOf").val()
+      finalWeightOutOf = parseFloat $(gradeForm).find("#finalWeightOutOf").val()
+      desiredGradeOutOf = parseFloat $(gradeForm).find("#desiredGradeOutOf").val()
+
+      currentGradePC = currentGrade/currentGradeOutOf
+      finalWeightPC = finalWeight/finalWeightOutOf
+      desiredGradePC = desiredGrade/desiredGradeOutOf
+
+      currentWeightPC = 1-finalWeightPC
+
+      neededForFinal = Math.max((desiredGradePC-currentGradePC*currentWeightPC)/finalWeightPC*100,0)
+
+      if isNaN(neededForFinal)
+        $("#results .noError").addClass("hidden")
+        $("#results .error").removeClass("hidden")
+      else
+        $("#results .noError").removeClass("hidden")
+        $("#results .error").addClass("hidden")
+
+      $("#results .neededForFinal").text(neededForFinal.toFixed(1))
+      $("#results .desiredGrade").text(desiredGrade.toFixed(0))
+      $("#results .desiredGradeOutOf").text(desiredGradeOutOf.toFixed(0))
+      # $(".dump").text([currentGrade, finalWeight, desiredGrade, currentWeight, neededForFinal])
+
+    updateResults()
+
+    $('#gradeForm input').change ->
+      updateResults()
+
+
+
