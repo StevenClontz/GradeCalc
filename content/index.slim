@@ -5,38 +5,38 @@ title: GradeCalc
 .jumbotron
   .container
     .row
-      .col-md-offset-3.col-md-6
+      .col-md-offset-2.col-md-8.col-sm-offset-1.col-sm-10
         h1 GradeCalc
         p 
-          | A simple tool to figure out what you need
-          br
+          | A simple tool to figure out what you need 
+          br.hidden-xs
           | to get that A (or B?).
 
 .container
   .row
-    .col-md-offset-3.col-md-6
+    .col-md-offset-2.col-md-8.col-sm-offset-1.col-sm-10
       form#gradeForm role="form"
         .row
-          .form-group.col-md-6
+          .form-group.col-sm-6
             label for="currentGrade" Your Current Grade:
-            input#currentGrade type="number" class="form-control" value="85" placeholder="100" min="0"
-          .form-group.col-md-6
+            input#currentGrade type="number" class="form-control" value="86" placeholder="100" min="0"
+          .form-group.col-sm-6
             label for="currentGradeOutOf" Out of:
             input#currentGradeOutOf type="number" class="form-control" value="100" placeholder="100" min="1"
         hr
         .row
-          .form-group.col-md-6
+          .form-group.col-sm-6
             label for="finalWeight" Weight of Final Exam:
-            input#finalWeight type="number" class="form-control" value="50" placeholder="50" min="0"
-          .form-group.col-md-6
+            input#finalWeight type="number" class="form-control" value="35" placeholder="35" min="0"
+          .form-group.col-sm-6
             label for="finalWeightOutOf" Out of:
             input#finalWeightOutOf type="number" class="form-control" value="100" placeholder="100" min="1"
         hr
         .row
-          .form-group.col-md-6
+          .form-group.col-sm-6
             label for="desiredGrade" Desired Grade:
             input#desiredGrade type="number" class="form-control" value="90" placeholder="90" min="0"
-          .form-group.col-md-6
+          .form-group.col-sm-6
             label for="desiredGradeOutOf" Out of:
             input#desiredGradeOutOf type="number" class="form-control" value="100" placeholder="100" min="1"
         hr
@@ -57,15 +57,28 @@ title: GradeCalc
             strong.desiredGradePC ???
             strong="%"
             | .
-            / .dump
+          hr.noerror
+          p.lead.noerror
+            | If you score 100% on the final, you will have an overall grade of 
+            strong.perfectFinal ???
+            strong="/"
+            strong.desiredGradeOutOf ???
+            |  or 
+            strong.perfectFinalPC ???
+            strong="%"
+            | .
           .error
             | Check to make sure all fields are filled in correctly.
+        hr
         p 
           | Made by 
           a href="http://www.stevenclontz.com" Steven Clontz
           |  (Github: 
           a href="http://github.com/StevenClontz/GradeCalc" @StevenClontz
           | )
+        p
+          small
+            | (Formerly known as the "Dead Day Grade Calculator")
 
 
 coffee:
@@ -85,8 +98,11 @@ coffee:
 
       currentWeightPC = 1-finalWeightPC
 
-      neededForFinalPC = Math.max((desiredGradePC-currentGradePC*currentWeightPC)/finalWeightPC*100,0)
-      neededForFinal = neededForFinalPC*finalWeight/100
+      neededForFinalPC = Math.max((desiredGradePC-currentGradePC*currentWeightPC)/finalWeightPC,0)
+      neededForFinal = neededForFinalPC*finalWeight
+
+      perfectFinalPC = currentGradePC*currentWeightPC+finalWeightPC
+      perfectFinal = perfectFinalPC*desiredGradeOutOf
 
       if isNaN(neededForFinal)
         $("#results .noError").addClass("hidden")
@@ -95,13 +111,14 @@ coffee:
         $("#results .noError").removeClass("hidden")
         $("#results .error").addClass("hidden")
 
-      $("#results .neededForFinal").text(neededForFinal.toFixed(0))
+      $("#results .neededForFinal").text(neededForFinal.toFixed(1))
       $("#results .finalWeight").text(finalWeight.toFixed(0))
-      $("#results .neededForFinalPC").text(neededForFinalPC.toFixed(1))
-      $("#results .desiredGrade").text(desiredGrade.toFixed(0))
+      $("#results .neededForFinalPC").text((neededForFinalPC*100).toFixed(1))
+      $("#results .desiredGrade").text(desiredGrade.toFixed(1))
       $("#results .desiredGradeOutOf").text(desiredGradeOutOf.toFixed(0))
       $("#results .desiredGradePC").text((desiredGradePC*100).toFixed(1))
-      # $(".dump").text([currentGrade, finalWeight, desiredGrade, currentWeight, neededForFinal])
+      $("#results .perfectFinal").text(perfectFinal.toFixed(1))
+      $("#results .perfectFinalPC").text((perfectFinalPC*100).toFixed(1))
 
     updateResults()
 
