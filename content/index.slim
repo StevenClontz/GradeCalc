@@ -8,9 +8,7 @@ title: GradeCalc
       .col-md-offset-2.col-md-8.col-sm-offset-1.col-sm-10
         h1 GradeCalc
         p 
-          | A simple tool to figure out what you need 
-          br.hidden-xs
-          | to get that A (or B?).
+          | A simple tool to figure out what you need to get that A (or B?).
 
 .container
   .row
@@ -26,7 +24,7 @@ title: GradeCalc
         hr
         .row
           .form-group.col-sm-6
-            label for="finalWeight" Weight of Final Exam:
+            label for="finalWeight" Weight of Remaining Work / Final:
             input#finalWeight type="number" class="form-control" value="35" placeholder="35" min="0"
           .form-group.col-sm-6
             label for="finalWeightOutOf" Out of:
@@ -49,7 +47,7 @@ title: GradeCalc
             |  (
             strong.neededForFinalPC ???
             strong="%"
-            | ) on the final to have an overall grade of  
+            | ) on your remaining work to have an overall grade of  
             strong.desiredGrade ???
             strong="/"
             strong.desiredGradeOutOf ???
@@ -57,9 +55,9 @@ title: GradeCalc
             strong.desiredGradePC ???
             strong="%"
             | ).
-          hr.noerror
-          p.lead.noerror
-            | If you score 100% on the final, you will have an overall grade of 
+          hr.noError
+          p.lead.noError
+            | If you score 100% on your remaining work, you will have an overall grade of 
             strong.perfectFinal ???
             strong="/"
             strong.desiredGradeOutOf ???
@@ -104,21 +102,21 @@ coffee:
       perfectFinalPC = currentGradePC*currentWeightPC+finalWeightPC
       perfectFinal = perfectFinalPC*desiredGradeOutOf
 
-      if isNaN(neededForFinal)
+      if isNaN(neededForFinal) or currentGradeOutOf <= 0 or finalWeightOutOf <= 0 or desiredGradeOutOf <= 0
         $("#results .noError").addClass("hidden")
         $("#results .error").removeClass("hidden")
       else
         $("#results .noError").removeClass("hidden")
         $("#results .error").addClass("hidden")
 
-      $("#results .neededForFinal").text(neededForFinal.toFixed(1))
-      $("#results .finalWeight").text(finalWeight.toFixed(0))
-      $("#results .neededForFinalPC").text((neededForFinalPC*100).toFixed(1))
-      $("#results .desiredGrade").text(desiredGrade.toFixed(1))
-      $("#results .desiredGradeOutOf").text(desiredGradeOutOf.toFixed(0))
-      $("#results .desiredGradePC").text((desiredGradePC*100).toFixed(1))
-      $("#results .perfectFinal").text(perfectFinal.toFixed(1))
-      $("#results .perfectFinalPC").text((perfectFinalPC*100).toFixed(1))
+        $("#results .neededForFinal").text(neededForFinal.toFixed(1))
+        $("#results .finalWeight").text(finalWeight.toFixed(0))
+        $("#results .neededForFinalPC").text((neededForFinalPC*100).toFixed(1))
+        $("#results .desiredGrade").text(desiredGrade.toFixed(1))
+        $("#results .desiredGradeOutOf").text(desiredGradeOutOf.toFixed(0))
+        $("#results .desiredGradePC").text((desiredGradePC*100).toFixed(1))
+        $("#results .perfectFinal").text(perfectFinal.toFixed(1))
+        $("#results .perfectFinalPC").text((perfectFinalPC*100).toFixed(1))
 
     updateResults()
 
