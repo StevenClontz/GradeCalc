@@ -46,27 +46,27 @@ title: GradeCalc
             strong.neededForFinal ???
             strong="/"
             strong.finalWeight ???
-            |  or 
+            |  (
             strong.neededForFinalPC ???
             strong="%"
-            |  on the final to have an overall grade of  
+            | ) on the final to have an overall grade of  
             strong.desiredGrade ???
             strong="/"
             strong.desiredGradeOutOf ???
-            |  or 
+            |  (
             strong.desiredGradePC ???
             strong="%"
-            | .
+            | ).
           hr.noerror
           p.lead.noerror
             | If you score 100% on the final, you will have an overall grade of 
             strong.perfectFinal ???
             strong="/"
             strong.desiredGradeOutOf ???
-            |  or 
+            |  (
             strong.perfectFinalPC ???
             strong="%"
-            | .
+            | ).
           .error
             | Check to make sure all fields are filled in correctly.
         hr
@@ -78,7 +78,7 @@ title: GradeCalc
           | )
         p
           small
-            | (Formerly known as the "Dead Day Grade Calculator")
+            | Formerly known as the "Dead Day Grade Calculator". Disclaimer: Your instructor may round fractions differently.
 
 
 coffee:
