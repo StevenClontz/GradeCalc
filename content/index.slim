@@ -13,6 +13,7 @@ description: A simple tool to compute the grade you need to get the grade you wa
 
 .container
   .row
+    .js-alert.alert.alert-warning You must have Javascript enabled to use this page!
     .col-md-offset-2.col-md-8.col-sm-offset-1.col-sm-10
       form#gradeForm role="form"
         .row
@@ -87,11 +88,14 @@ description: A simple tool to compute the grade you need to get the grade you wa
           | )
         p
           small
-            | Formerly known as the "Dead Day Grade Calculator". Disclaimer: Your instructor may round fractions differently.
+            span.deadday
+            | Note: Your instructor may round fractions differently.
 
 
 coffee:
   jQuery ->
+    $('.js-alert').addClass("hidden")
+
     updateResults = ->
       gradeForm = $("#gradeForm")
       currentGrade = parseFloat $(gradeForm).find("#currentGrade").val()
@@ -136,6 +140,9 @@ coffee:
 
     $('#gradeForm input').change ->
       updateResults()
+
+    if document.referrer == "http://www.auburn.edu/~clontsc/deadday.php"
+      $(".deadday").text('Formerly known as the "Dead Day Grade Calculator". ')
 
 
 
