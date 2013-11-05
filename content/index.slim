@@ -41,6 +41,16 @@ description: A simple tool to compute the grade you need to get the grade you wa
         hr
         #results.text-center
           p.lead.noError
+            | Your current grade is 
+            strong.currentGrade ???
+            strong="/"
+            strong.currentGradeOutOf ???
+            |  (
+            strong.currentGradePC ???
+            strong="%"
+            | ).
+          hr.noError
+          p.lead.noError
             | You need to earn at least 
             strong.neededForFinal ???
             strong="/"
@@ -116,6 +126,9 @@ coffee:
         $("#results .desiredGrade").text(desiredGrade.toFixed(1))
         $("#results .desiredGradeOutOf").text(desiredGradeOutOf.toFixed(0))
         $("#results .desiredGradePC").text((desiredGradePC*100).toFixed(1))
+        $("#results .currentGrade").text(currentGrade.toFixed(1))
+        $("#results .currentGradeOutOf").text(currentGradeOutOf.toFixed(0))
+        $("#results .currentGradePC").text((currentGradePC*100).toFixed(1))
         $("#results .perfectFinal").text(perfectFinal.toFixed(1))
         $("#results .perfectFinalPC").text((perfectFinalPC*100).toFixed(1))
 
