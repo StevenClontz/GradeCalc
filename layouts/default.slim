@@ -13,7 +13,8 @@ html lang="en"
     link rel="icon" href="calculator.ico"
     less:
       @darkbg: #B4E3A3;
-      @lightbg: #F8FFF3;
+      @lightbg: #F8FFF8;
+      // @lightbg: #FFFFFF;
       body {
         background:@lightbg;
       }
@@ -23,6 +24,14 @@ html lang="en"
       }
       hr {
         border-top-color:@darkbg;
+      }
+      .social-button {
+        height: 20px;
+        display: inline-block;
+        margin-left: 5px;
+        .fb-share-button span {
+          top: -6px;
+        }
       }
 
     coffee:

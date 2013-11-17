@@ -39,59 +39,66 @@ description: A simple grade calculator to compute the grade you have, as well as
           .form-group.col-sm-6
             label for="desiredGradeOutOf" Out of:
             input#desiredGradeOutOf type="number" class="form-control" value="100" placeholder="100" min="1"
-        hr
-        #results.text-center
-          p.lead.noError
-            | Your current grade is 
-            strong.currentGrade ???
-            strong="/"
-            strong.currentGradeOutOf ???
-            |  (
-            strong.currentGradePC ???
-            strong="%"
-            | ).
-          hr.noError
-          p.lead.noError
-            | You need to earn at least 
-            strong.neededForFinal ???
-            strong="/"
-            strong.finalWeight ???
-            |  (
-            strong.neededForFinalPC ???
-            strong="%"
-            | ) on your remaining work to have an overall grade of  
-            strong.desiredGrade ???
-            strong="/"
-            strong.desiredGradeOutOf ???
-            |  (
-            strong.desiredGradePC ???
-            strong="%"
-            | ).
-          hr.noError
-          p.lead.noError
-            | If you score 100% on your remaining work, you will have an overall grade of 
-            strong.perfectFinal ???
-            strong="/"
-            strong.desiredGradeOutOf ???
-            |  (
-            strong.perfectFinalPC ???
-            strong="%"
-            | ).
-          .error
-            | Check to make sure all fields are filled in correctly.
-        hr
-        .text-center
-          .fb-share-button data-href="http://gradecalc.stevenclontz.com" data-type="button_count"
-        p 
-          | Made by 
-          a href="http://www.stevenclontz.com" Steven Clontz
-          |  (Github: 
-          a href="http://github.com/StevenClontz/GradeCalc" @StevenClontz
-          | )
-        p
-          small
-            span.deadday
-            | Note: Your instructor may round fractions differently.
+      hr
+      #results.text-center
+        p.lead.noError
+          | Your current grade is 
+          strong.currentGrade ???
+          strong="/"
+          strong.currentGradeOutOf ???
+          |  (
+          strong.currentGradePC ???
+          strong="%"
+          | ).
+        hr.noError
+        p.lead.noError
+          | You need to earn at least 
+          strong.neededForFinal ???
+          strong="/"
+          strong.finalWeight ???
+          |  (
+          strong.neededForFinalPC ???
+          strong="%"
+          | ) on your remaining work to have an overall grade of  
+          strong.desiredGrade ???
+          strong="/"
+          strong.desiredGradeOutOf ???
+          |  (
+          strong.desiredGradePC ???
+          strong="%"
+          | ).
+        hr.noError
+        p.lead.noError
+          | If you score 100% on your remaining work, you will have an overall grade of 
+          strong.perfectFinal ???
+          strong="/"
+          strong.desiredGradeOutOf ???
+          |  (
+          strong.perfectFinalPC ???
+          strong="%"
+          | ).
+        .error
+          | Check to make sure all fields are filled in correctly.
+      hr
+      #social.text-center
+        .social-button.social-button-fb
+          .fb-share-button data-href="http://gradecalc.stevenclontz.com" data-type="button"
+        .social-button.social-button-pin
+          a href="//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fgradecalc.stevenclontz.com&media=http%3A%2F%2Fgradecalc.stevenclontz.com%2Fscreenshot.png&description=GradeCalc%20%7C%20Grade%20Calculator%20to%20figure%20out%20what%20you%20need%20on%20your%20Final" data-pin-do="buttonPin" data-pin-config="beside"
+            img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"
+        .social-button.social-button-tw
+          a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-via="StevenXClontz" data-url="https://gradecalc.stevenclontz.com" data-count="none" data-text="GradeCalc | Grade Calculator to figure out what you need on your Final" Tweet
+      hr
+      p#credits 
+        | Made by 
+        a href="http://www.stevenclontz.com" Steven Clontz
+        |  (Github: 
+        a href="http://github.com/StevenClontz/GradeCalc" @StevenClontz
+        | )
+      p
+        small
+          span.deadday
+          | Note: Your instructor may round fractions differently.
 
 
 coffee:
@@ -146,5 +153,8 @@ coffee:
     if document.referrer == "http://www.auburn.edu/~clontsc/deadday.php"
       $(".deadday").text('Formerly known as the "Dead Day Grade Calculator". ')
 
+javascript:
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
+script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"
 
