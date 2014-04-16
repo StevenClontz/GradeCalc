@@ -33,9 +33,15 @@ html lang="en"
           top: -6px;
         }
       }
+      #credits {
+        text-align: center;
+      }
+      p small {
+        color: darken(@darkbg, 20%);
+      }
 
     coffee:
-      unless document.location.hostname in ['localhost', 'gradecalc.stevenclontz.com']
+      unless document.location.hostname in ['localhost', 'gradecalc.stevenclontz.com', 'gradecalc.dev']
         window.location = "http://gradecalc.stevenclontz.com"
 
     javascript:
